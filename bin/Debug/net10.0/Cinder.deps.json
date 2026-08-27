@@ -8,10 +8,30 @@
     ".NETCoreApp,Version=v10.0": {
       "Cinder/1.0.0": {
         "dependencies": {
+          "FFMpegCore": "5.4.0",
           "Microsoft.AspNetCore.OpenApi": "10.0.11"
         },
         "runtime": {
           "Cinder.dll": {}
+        }
+      },
+      "FFMpegCore/5.4.0": {
+        "dependencies": {
+          "Instances": "3.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FFMpegCore.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
+      "Instances/3.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Instances.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Microsoft.AspNetCore.OpenApi/10.0.11": {
@@ -40,6 +60,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FFMpegCore/5.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nymhPWpwvBaB4fOqf0thxg7Inm8SrruFQLdCMFEDKD8S3hy0/iV2vuKaJvaL9ZnbJx/2rJCHnJXOymo2apXovg==",
+      "path": "ffmpegcore/5.4.0",
+      "hashPath": "ffmpegcore.5.4.0.nupkg.sha512"
+    },
+    "Instances/3.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LfhegDpmA8PuHW58RmgVvCDG/mfVCTU+Vhy4ppmXLJfAer33Xl0NocDy92OwSL6CnkVdx41O/I0+BjNhU1JtMQ==",
+      "path": "instances/3.0.2",
+      "hashPath": "instances.3.0.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.OpenApi/10.0.11": {
       "type": "package",

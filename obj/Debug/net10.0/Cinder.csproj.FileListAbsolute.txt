@@ -31,3 +31,5 @@
 /home/viktor-paraj/Desktop/Code/Cinder/Cinder/obj/Debug/net10.0/Cinder.pdb
 /home/viktor-paraj/Desktop/Code/Cinder/Cinder/obj/Debug/net10.0/Cinder.genruntimeconfig.cache
 /home/viktor-paraj/Desktop/Code/Cinder/Cinder/obj/Debug/net10.0/ref/Cinder.dll
+/home/viktor-paraj/Desktop/Code/Cinder/Cinder/bin/Debug/net10.0/FFMpegCore.dll
+/home/viktor-paraj/Desktop/Code/Cinder/Cinder/bin/Debug/net10.0/Instances.dll
