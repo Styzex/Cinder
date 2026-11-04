@@ -1,9 +1,11 @@
 @Cinder_HostAddress = http://localhost:5252
 
-GET {{Cinder_HostAddress}}/?InputPath=./TestData/Input/test.mp4
+GET {{Cinder_HostAddress}}/api/process?InputName=test.mp4&codec=h264&id=1
 
 ###
 
-POST {{Cinder_HostAddress}}/
+GET {{Cinder_HostAddress}}/
 
+###
+GET {{Cinder_HostAddress}}/api/inputs
 ###

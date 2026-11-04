@@ -15,5 +15,6 @@ bld/
 *.VisualState.xml
 TestResult.xml
 publish/
-TestData/Input/*
-TestData/Output/*
+TestData/
+Output/
+Input/
