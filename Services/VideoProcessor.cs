@@ -14,12 +14,12 @@ public static class VideoProcessor
       case SupportedCodec.Av1:
         options.WithCustomArgument("-c:v libsvtav1 -preset 8");
         break;
-      case SupportedCodec.H265:
-        options.WithVideoCodec(VideoCodec.LibX265);
-        break;
       case SupportedCodec.H264:
-      default:
         options.WithVideoCodec(VideoCodec.LibX264);
+        break;
+      case SupportedCodec.H265:
+      default:
+        options.WithVideoCodec(VideoCodec.LibX265);
         break;
     }
   }
