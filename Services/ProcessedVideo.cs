@@ -3,43 +3,34 @@ using Cinder.Models;
 
 namespace Cinder.Services;
 
-public class ProcessedVideo(PathString path)
+public class ProcessedVideo
 {
-  private readonly IMediaAnalysis analysis = FFProbe.Analyse(path);
-  public readonly PathString Path = path;
-  public string Name = SetName(path);
-  public readonly SupportedCodec? Codec = DetectCodec();
+  public PathString Path { get; }
+  public string Name { get; }
+  public SupportedCodec? Codec { get; }
+  public IReadOnlyList<Video.Quality> Qualities { get; }
 
-  // I know that this sound really smart but it's actually stupidly simple
-  // Get's the highest quality and all of the lower ones using a predicate
-  public readonly List<Video.Quality> Qualities = Video.Qualities
-    .Where(quality => quality.Height <= OriginalQuality()).ToList();
-
-  private static int? OriginalQuality()
+  // Moved to a regular constructor from a primary constructor because it was causing me issues
+  public ProcessedVideo(PathString path)
   {
-    int? height = analysis.PrimaryVideoStream!.Height;
-    return height;
+    var analysis = FFProbe.Analyse(path);
+
+    Path = path;
+    // Should remove everything before '/' or '\' so with "Test/Something/my_thing.file" the result would be "my_thing"
+    Name = System.IO.Path.GetFileNameWithoutExtension(path.ToString().Replace('\\', '/'));
+    Codec = DetectCodec(analysis.PrimaryVideoStream?.CodecName);
+    // I know that this sound really smart but it's actually stupidly simple
+    // Get's the highest quality and all of the lower ones using a predicate
+    Qualities = Video.Qualities
+      .Where(quality =>
+        quality.Height <=
+        (analysis.PrimaryVideoStream?.Height ??
+         0)) // I just moved the GetOriginalQuality methods body into the paranthesis
+      .ToList();
   }
 
-  // Should remove everything before '/' or '\' so with "Test/Something/my_thing.file" the result would be "my_thing"
-  private static string SetName(PathString path)
+  private static SupportedCodec? DetectCodec(string? codec)
   {
-    var p = path.ToString().Trim().Replace('\\', '/');
-    return System.IO.Path.GetFileNameWithoutExtension(p);
-  }
-
-  private static SupportedCodec? DetectCodec()
-  {
-    // Source - https://stackoverflow.com/a/33700000
-    // Posted by timgavin
-    // Retrieved 2026-11-13, License - CC BY-SA 3.0
-    /*
-     codec = exec(
-     "ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 {$input['filename']}");
-    */
-    var codec = analysis.PrimaryVideoStream?.CodecName;
-
-
     // We use string.Equals instead of codec.Equals because for some magical reason it fixes the bug where if codec is null the ifs blow my foot off with a shotgun.
     if (string.Equals(codec, "av1", StringComparison.OrdinalIgnoreCase))
       return SupportedCodec.Av1;
